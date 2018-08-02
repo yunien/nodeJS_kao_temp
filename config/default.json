@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "dbConfig": {
+      "server": "127.0.0.1",
+      "dbName": "sev",
+      "user": "sev",
+      "password": "wistronsev",
+      "host": 5432,
+      "dialect": "postgresql"
+    }
+  },
+  "prd": {
+    "dbConfig": {
+      "server": "sev.c0w1mwza7x6n.us-west-2.rds.amazonaws.com",
+      "dbName": "sev",
+      "user": "sev",
+      "password": "wistronsev",
+      "host": 5432,
+      "dialect": "postgresql"
+    }
+  },
+   "LBS": {
+       "HOST": "52.27.122.207",
+       "PORT": "3000"
+   }
+}

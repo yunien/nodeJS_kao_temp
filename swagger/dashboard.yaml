@@ -1,0 +1,921 @@
+swagger: "2.0"
+info:
+  version: "20170928"
+  title: "Sev Backend API"
+host: "www.wistronaws.com"
+basePath: "/api/dashboard"
+
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /createArea:
+    post:
+      description: 創建區域
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 字串格式為:TYPE CONTENT
+      - name: body
+        in: body
+        description: Create area Data
+        schema:
+          $ref: "#/definitions/createAreaData"
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/createAreaSuccess"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+        400:
+          description: Bad request
+          schema:
+            $ref: "#/definitions/createAreaError"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Unauthorized"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/InternalServerError"
+      
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "400"
+          401:
+            statusCode: "401"            
+          5\d{2}:
+            statusCode: "500"          
+          2\d{2}:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
+        requestParameters:
+          integration.request.header.Authorization: "method.request.header.Authorization"
+        uri: "http://${stageVariables.serverurl}/createArea"
+        passthroughBehavior: when_no_match
+        httpMethod: POST
+        type: http
+  
+  /getFirstMenu:
+    get:
+      description: 取得菜單列表
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 字串格式為:TYPE CONTENT
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/FirstMenuSuccess"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+        400:
+          description: Bad request
+          schema:
+            $ref: "#/definitions/FirstMenuError"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Unauthorized"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/InternalServerError"
+      
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "400"
+          401:
+            statusCode: "401"            
+          5\d{2}:
+            statusCode: "500"          
+          2\d{2}:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
+        requestParameters:
+          integration.request.header.Authorization: "method.request.header.Authorization"
+        uri: "http://${stageVariables.serverurl}/getFirstMenu"
+        passthroughBehavior: when_no_match
+        httpMethod: GET
+        type: http
+  
+  /getPassableArea/{uuid}:
+    get:
+      description: 取得行走區域
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 字串格式為:TYPE CONTENT
+      - name: uuid
+        in: path
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/PassableAreaSuccess"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+        400:
+          description: Bad request
+          schema:
+            $ref: "#/definitions/PassableAreaError"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Unauthorized"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/InternalServerError"
+      
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "400"
+          401:
+            statusCode: "401"            
+          5\d{2}:
+            statusCode: "500"          
+          2\d{2}:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
+        requestParameters:
+          integration.request.header.Authorization: "method.request.header.Authorization"
+          integration.request.path.uuid: "method.request.path.uuid"
+        uri: "http://${stageVariables.serverurl}/getPassableArea/{uuid}"
+        passthroughBehavior: when_no_match
+        httpMethod: GET
+        type: http
+  
+  /getRoomInfo/{uuid}:
+    get:
+      description: 取得創建區域含各廠區地圖
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 字串格式為:TYPE CONTENT
+      - name: uuid
+        in: path
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/RoomInfoSuccess"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+        400:
+          description: Bad request
+          schema:
+            $ref: "#/definitions/RoomInfoError"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Unauthorized"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/InternalServerError"
+      
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "400"
+          401:
+            statusCode: "401"            
+          5\d{2}:
+            statusCode: "500"          
+          2\d{2}:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
+        requestParameters:
+          integration.request.header.Authorization: "method.request.header.Authorization"
+          integration.request.path.uuid: "method.request.path.uuid"
+        uri: "http://${stageVariables.serverurl}/getRoomInfo/{uuid}"
+        passthroughBehavior: when_no_match
+        httpMethod: GET
+        type: http
+
+  /createCamera:
+    post:
+      description: 創建camera位置
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 字串格式為:TYPE CONTENT
+      - name: body
+        in: body
+        schema:
+          $ref: "#/definitions/CreateCameraData"
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/CreateCameraSuccess"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+        400:
+          description: Bad request
+          schema:
+            $ref: "#/definitions/CreateCameraError"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Unauthorized"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/InternalServerError"
+      
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "400"
+          401:
+            statusCode: "401"            
+          5\d{2}:
+            statusCode: "500"          
+          2\d{2}:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
+        requestParameters:
+          integration.request.header.Authorization: "method.request.header.Authorization"
+        uri: "http://${stageVariables.serverurl}/createCamera"
+        passthroughBehavior: when_no_match
+        httpMethod: POST
+        type: http
+  
+  /getCameras/{uuid}:
+    get:
+      description: 取得攝影機位置資訊
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 字串格式為:TYPE CONTENT
+      - name: uuid
+        in: path
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/CamerasSuccess"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+        400:
+          description: Bad request
+          schema:
+            $ref: "#/definitions/CameraError"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Unauthorized"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/InternalServerError"
+      
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "400"
+          401:
+            statusCode: "401"            
+          5\d{2}:
+            statusCode: "500"          
+          2\d{2}:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
+        requestParameters:
+          integration.request.header.Authorization: "method.request.header.Authorization"
+          integration.request.path.uuid: "method.request.path.uuid"
+        uri: "http://${stageVariables.serverurl}/getCameras/{uuid}"
+        passthroughBehavior: when_no_match
+        httpMethod: GET
+        type: http
+  
+  /createRobot:
+    post:
+      description: 創建機器人資訊
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 字串格式為:TYPE CONTENT
+      - name: body
+        in: body
+        schema:
+          $ref: "#/definitions/CreateRobotData"
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/CreateRobotSuccess"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+        400:
+          description: Bad request
+          schema:
+            $ref: "#/definitions/CreateRobotError"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Unauthorized"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/InternalServerError"
+      
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "400"
+          401:
+            statusCode: "401"            
+          5\d{2}:
+            statusCode: "500"          
+          2\d{2}:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
+        requestParameters:
+          integration.request.header.Authorization: "method.request.header.Authorization"
+        uri: "http://${stageVariables.serverurl}/createRobot"
+        passthroughBehavior: when_no_match
+        httpMethod: POST
+        type: http
+  
+  /getRobots/{uuid}:
+    get:
+      description: 取得機器人資訊
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 字串格式為:TYPE CONTENT
+      - name: uuid
+        in: path
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/RobotsSuccess"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+        400:
+          description: Bad request
+          schema:
+            $ref: "#/definitions/RobotsError"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Unauthorized"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/InternalServerError"
+      
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "400"
+          401:
+            statusCode: "401"            
+          5\d{2}:
+            statusCode: "500"          
+          2\d{2}:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
+        requestParameters:
+          integration.request.header.Authorization: "method.request.header.Authorization"
+          integration.request.path.uuid: "method.request.path.uuid"
+        uri: "http://${stageVariables.serverurl}/getRobots/{uuid}"
+        passthroughBehavior: when_no_match
+        httpMethod: GET
+        type: http
+  
+  /robotView/{direction}:
+    get:
+      description: 取得機器人目前視角畫面
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 字串格式為:TYPE CONTENT
+      - name: direction
+        in: path
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/RobotViewSuccess"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+        400:
+          description: Bad request
+          schema:
+            $ref: "#/definitions/RobotViewError"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Unauthorized"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/InternalServerError"
+      
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "400"
+          401:
+            statusCode: "401"            
+          5\d{2}:
+            statusCode: "500"          
+          2\d{2}:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
+        requestParameters:
+          integration.request.header.Authorization: "method.request.header.Authorization"
+          integration.request.path.direction: "method.request.path.direction"
+        uri: "http://${stageVariables.serverurl}/robotView/{direction}"
+        passthroughBehavior: when_no_match
+        httpMethod: GET
+        type: http
+        
+        
+definitions:
+## request Object
+  createAreaData:
+    type: object
+    required:
+      - area
+      - building
+      - floor
+      - roomNo
+      - mapWidth
+      - mapHeight
+      - space
+      - mapImg
+      - mapMask
+    properties:
+      area:
+        type: string
+        description: 區域
+      building:
+        type: string
+        description: 建築物
+      floor:
+        type: string
+        description: 樓層
+      roomNo:
+        type: string
+        description: 房號
+      mapWidth:
+        type: number
+        description: 地圖寬度(公尺)
+      mapHeight:
+        type: number
+        description: 地圖長度(公尺)
+      space:
+        type: number
+        description: 繪製地圖寬度(公分)
+      mapImg:
+        type: string
+        description: 房間底圖
+      mapMask:
+        type: string
+        description: 靜置區域底圖
+
+  CreateCameraData:
+    type: object
+    required:
+      - roomUuid
+      - name
+      - x
+      - y
+      - rotate
+      - flip
+      - privateIp
+    properties:
+      roomUuid:
+        type: string
+        description: 房間uuid
+      name:
+        type: string
+        description: 攝影機名稱
+      x:
+        type: string
+        description: x座標
+      y:
+        type: string
+        description: y座標
+      rotate:
+        type: integer
+        description: 旋轉角度
+      flip:
+        type: boolean
+        description: 攝影機名稱
+      privateIp:
+        type: string
+        description: 攝影機ip
+  
+  CreateRobotData:
+    type: object
+    required:
+      - roomUuid
+      - name
+      - indoorId
+    properties:
+      roomUuid:
+        type: string
+        description: 房間uuid
+      name:
+        type: string
+        description: 機器人名稱
+      indoorId:
+        type: string
+        description: 室內定位id
+      
+
+## 200 Object
+  createAreaSuccess:
+    type: object
+    properties:
+      mapImg:
+        type: string
+        description: 廠區底圖
+      mapMask:
+        type: string
+        description: 廠區靜置區域圖
+      prohibitedArea:
+        type: string
+        description: 二值法描繪出來的靜置區域圖
+  
+  FirstMenuSuccess:
+    type: object
+    properties:
+      area:
+        type: array
+        description: 地區
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+              description: 地區名稱
+            value:
+              type: string
+              description: 地區名稱
+            tower:
+              type: array
+              description: 建築物
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: 建築物名稱
+                  value:
+                    type: string
+                    description: 建築物名稱
+                  floor:
+                    type: array
+                    description: 樓層
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: 樓層名稱
+                        value:
+                          type: string
+                          description: 樓層名稱
+                        roomList:
+                          type: array
+                          description: 房間名
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                                description: 房間名名稱
+                              value:
+                                type: string
+                                description: 房間名uuid
+
+  PassableAreaSuccess:
+    type: string
+    properties:
+      zone:
+        type: array
+        description: 可行走區域實際座標
+        items:
+          type: object
+          properties:
+            position_name:
+              type: string
+            obj:
+              type: object
+              properties:
+                key:
+                  type: number
+                  description: key value
+            x:
+              type: string
+            y:
+              type: string
+
+  RoomInfoSuccess:
+    type: object
+    properties:
+      area:
+        type: string
+        description: 區域
+      building:
+        type: string
+        description: 建築物
+      floor:
+        type: string
+        description: 樓層
+      roomNo:
+        type: string
+        description: 房號
+      mapWidth:
+        type: number
+        description: 地圖寬(公尺)
+      mapHeight:
+        type: number
+        description: 地圖長(公尺)
+      mapImg:
+        type: string
+        description: 地圖(base64)
+      mapMask:
+        type: string
+        description: 靜置區域(base64)
+      zone:
+        type: array
+        description: 可行走區域實際座標
+        items:
+          type: object
+          properties:
+            position_name:
+              type: string
+            obj:
+              type: object
+              properties:
+                key:
+                  type: number
+                  description: key value
+            x:
+              type: string
+            y:
+              type: string
+      prohibitedArea:
+        type: array
+        description: 靜置區域實際座標
+        items:
+          type: object
+          properties:
+            position_name:
+              type: string
+            obj:
+              type: object
+              properties:
+                key:
+                  type: number
+                  description: key value
+            x:
+              type: string
+            y:
+              type: string
+        
+  CreateCameraSuccess:
+    type: object
+
+  CamerasSuccess:
+    type: array
+    description: 該區域內所有攝影機資訊
+    items:
+      type: object
+      properties:
+        rackId:
+          type: roomUuid
+          description: 房間uuid
+        name:
+          type: string
+          description: 攝影機名稱
+        x:
+          type: string
+          description: x軸座標
+        y:
+          type: string
+          description: y軸座標
+        rotate:
+          type: integer
+          description: 旋轉角度
+        flip:
+          type: integer
+        privateIp:
+          type: string
+          description: 攝影機即時影像ip
+              
+  CreateRobotSuccess:
+    type: object
+    
+  RobotsSuccess:
+    type: array
+    description: 該區域內所有攝影機資訊
+    items:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: 機器人uuid
+        roomUuid:
+          type: string
+          description: 房間uuid
+        name:
+          type: string
+          description: 機器人名稱
+        indoorId:
+          type: string
+          description: 室內定位id
+        
+  RobotViewSuccess:
+    type: object
+    properties:
+      image:
+        type: string
+        description: 圖片(base64)
+  
+## 400 Object
+  createAreaError:
+    type: object
+    properties:
+      errorCode:
+        type: string
+        description: |
+          RACKID_EXIST 機櫃id已存在
+  
+  FirstMenuError:
+    type: object
+    properties:
+      errorCode:
+        type: string
+        description: |
+          INTERNAL_ERROR 撈取資料錯誤
+
+  PassableAreaError:
+    type: object
+    properties:
+      errorCode:
+        type: string
+        description: |
+          UUID_DOES_NOT_EXIST 房間uuid不存在
+
+  RoomInfoError:
+    type: object
+    properties:
+      errorCode:
+        type: string
+        description: |
+          UUID_DOES_NOT_EXIST 房間uuid不存在
+  
+  CreateCameraError:
+    type: object
+    properties:
+      errorCode:
+        type: string
+        description: |
+          UUID_DOES_NOT_EXIST 房間uuid不存在
+          PRIVATE_IP_HAS_BEEN_EXIST 攝影機ip已經存在
+          
+  CameraError:
+    type: object
+    properties:
+      errorCode:
+        type: string
+        description: |
+          UUID_DOES_NOT_EXIST 房間uuid不存在
+  
+  CreateRobotError:
+    type: object
+    properties:
+      errorCode:
+        type: string
+        description: |
+          UUID_DOES_NOT_EXIST 房間uuid不存在
+  
+  RobotsError:
+    type: object
+    properties:
+      errorCode:
+        type: string
+        description: |
+          UUID_DOES_NOT_EXIST 房間uuid不存在
+  
+  RobotViewError:
+    type: object
+    properties:
+      errorCode:
+        type: string
+        description: |
+          DIRECTION_DOES_NOT_EXIST direction不正確
+          
+## 401 Object
+  Unauthorized:
+    type: object
+    properties:
+      errorCode:
+        type: string
+        description: |
+          AUTHENTICATION_ERROR
+
+## 500 Object
+  InternalServerError:
+    type: object
+    properties:
+      errorCode:
+        type: string
+        description: |
+          INTERNAL_ERROR

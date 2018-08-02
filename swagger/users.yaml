@@ -1,0 +1,401 @@
+swagger: "2.0"
+info:
+  version: "20170928"
+  title: "Sev Backend API"
+host: "www.wistronaws.com"
+basePath: "/api/users"
+
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /register:
+    post:
+      description: 來賓註冊並進入機房
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 字串格式為:TYPE CONTENT
+      - name: body
+        in: body
+        description: user register data
+        schema:
+          $ref: "#/definitions/UserRegData"
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/RegisterSuccess"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+        400:
+          description: Bad request
+          schema:
+            $ref: "#/definitions/RegisterError"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Unauthorized"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/InternalServerError"
+      
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "400"
+          401:
+            statusCode: "401"            
+          5\d{2}:
+            statusCode: "500"          
+          2\d{2}:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
+        requestParameters:
+          integration.request.header.Authorization: "method.request.header.Authorization"
+        uri: "http://${stageVariables.serverurl}/register"
+        passthroughBehavior: when_no_match
+        httpMethod: POST
+        type: http
+  
+  /getRackLocation/{rackId}:
+    get:
+      description: 註冊畫面中，用rackId取得rackLocation
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 字串格式為:TYPE CONTENT
+      - name: rackId
+        in: path
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/RackLocationSuccess"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+        400:
+          description: Bad request
+          schema:
+            $ref: "#/definitions/RackLocationError"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Unauthorized"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/InternalServerError"
+      
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "400"
+          401:
+            statusCode: "401"            
+          5\d{2}:
+            statusCode: "500"          
+          2\d{2}:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
+        requestParameters:
+          integration.request.header.Authorization: "method.request.header.Authorization"
+          integration.request.path.rackId: "method.request.path.rackId"
+        uri: "http://${stageVariables.serverurl}/getRackLocation/{rackId}"
+        passthroughBehavior: when_no_match
+        httpMethod: GET
+        type: http
+  
+  /getBadge/{badgeId}:
+    get:
+      description: 取得Badge資訊(登出前用)
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 字串格式為:TYPE CONTENT
+      - name: badgeId
+        in: path
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/BadgeSuccess"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+        400:
+          description: Bad request
+          schema:
+            $ref: "#/definitions/BadgeError"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Unauthorized"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/InternalServerError"
+      
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "400"
+          401:
+            statusCode: "401"            
+          5\d{2}:
+            statusCode: "500"          
+          2\d{2}:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
+        requestParameters:
+          integration.request.header.Authorization: "method.request.header.Authorization"
+          integration.request.path.badgeId: "method.request.path.badgeId"
+        uri: "http://${stageVariables.serverurl}/getBadge/{badgeId}"
+        passthroughBehavior: when_no_match
+        httpMethod: GET
+        type: http
+
+  /checkOut:
+    post:
+      description: 登出
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        type: string
+        description: 字串格式為:TYPE CONTENT
+      - name: body
+        in: body
+        description: checkout data
+        schema:
+          $ref: "#/definitions/CheckOutData"
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/CheckOutSuccess"
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+            Access-Control-Allow-Headers:
+              type: string
+        400:
+          description: Bad request
+          schema:
+            $ref: "#/definitions/CheckOutError"
+        401:
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/Unauthorized"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/InternalServerError"
+      
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "400"
+          401:
+            statusCode: "401"            
+          5\d{2}:
+            statusCode: "500"          
+          2\d{2}:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+              method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key'''
+        requestParameters:
+          integration.request.header.Authorization: "method.request.header.Authorization"
+        uri: "http://${stageVariables.serverurl}/checkOut"
+        passthroughBehavior: when_no_match
+        httpMethod: POST
+        type: http
+
+definitions:
+## request Object
+  UserRegData:
+    type: object
+    required:
+      - badgeId
+      - indoorId
+      - company
+      - gender
+      - image
+      - mobile
+      - name
+      - rackId
+      - rackLocation
+    properties:
+      badgeId:
+        type: string
+        description: 門禁卡id
+      indoorId:
+        type: string
+        description: 室內定位id
+      company:
+        type: string
+        description: 公司名稱
+      gender:
+        type: string
+        description: 男生 male, 女生 female
+      image:
+        type: string
+        description: 大頭照base64編碼
+      mobile:
+        type: string
+        description: 手機號碼
+      name:
+        type: string
+        description: 來賓姓名
+      rackId:
+        type: string
+        description: 機櫃id
+      rackLocation:
+        type: string
+        description: 機櫃位置
+
+  CheckOutData:
+    type: object
+    required:
+      - uuid
+      - badgeId
+    properties:
+      uuid:
+        type: string
+        description: 門禁卡使用表欄位uuid
+      badgeId:
+        type: string
+        description: 門禁卡id
+
+## 200 Object
+  RegisterSuccess:
+    type: object
+
+  RackLocationSuccess:
+    type: object
+    properties:
+      rackLocation:
+        type: string
+        description: 機櫃地區名稱
+
+  BadgeSuccess:
+    type: object
+    properties:
+      uuid:
+        type: string
+        description: 門禁卡uuid
+      badgeId:
+        type: string
+        description: 門禁卡id
+      indoorId:
+        type: string
+        description: 室內定位卡id
+      company:
+        type: string
+        description: 公司名稱
+      name:
+        type: string
+        description: 來賓名稱
+      mobile:
+        type: string
+        description: 手機號碼
+      gender:
+        type: string
+        description: 性別
+      image:
+        type: string
+        description: 大頭照(base64編碼)
+      rackId:
+        type: string
+        description: 機櫃id
+      rackLocation:
+        type: string
+        description: 機櫃位置
+
+  CheckOutSuccess:
+    type: object
+
+## 400 Object
+  RegisterError:
+    type: object
+    properties:
+      errorCode:
+        type: string
+        description: |
+          RACKID_DOES_NOT_EXIST 機櫃id不存在
+          BADGE_BE_USING 門禁卡已被使用中
+  
+  RackLocationError:
+    type: object
+    properties:
+      errorCode:
+        type: string
+        description: |
+          RACKID_DOES_NOT_EXIST 機櫃id不存在
+
+  BadgeError:
+    type: object
+    properties:
+      errorCode:
+        type: string
+        description: |
+          BADGE_ID_NO_ENABLED 門禁卡未啟用
+  
+  CheckOutError:
+    type: object
+    properties:
+      errorCode:
+        type: string
+        description: |
+          BADGE_UN_USING 門禁卡未被使用
+
+## 401 Object
+  Unauthorized:
+    type: object
+    properties:
+      errorCode:
+        type: string
+        description: |
+          AUTHENTICATION_ERROR
+
+## 500 Object
+  InternalServerError:
+    type: object
+    properties:
+      errorCode:
+        type: string
+        description: |
+          INTERNAL_ERROR
