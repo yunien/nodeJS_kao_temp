@@ -5,6 +5,10 @@
 		"typeProperties": {
 			"sources": [
 				{
+					"dataset": {
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference"
+					},
 					"name": "dataflow"
 				}
 			],
@@ -14,7 +18,7 @@
 					"name": "SelectCSV"
 				}
 			],
-			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false) ~> dataflow\ndataflow select(skipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectCSV"
+			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> dataflow\ndataflow select(skipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectCSV"
 		}
 	}
 }
