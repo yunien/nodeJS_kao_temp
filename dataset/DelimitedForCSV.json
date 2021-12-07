@@ -1,0 +1,58 @@
+{
+	"name": "DelimitedForCSV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedServiceForCSV",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Eldon Base for stackable storage shelf, platinum",
+				"type": "String"
+			},
+			{
+				"name": "Muhammed MacIntyre",
+				"type": "String"
+			},
+			{
+				"name": "3",
+				"type": "String"
+			},
+			{
+				"name": "-213.25",
+				"type": "String"
+			},
+			{
+				"name": "38.94",
+				"type": "String"
+			},
+			{
+				"name": "35",
+				"type": "String"
+			},
+			{
+				"name": "Nunavut",
+				"type": "String"
+			},
+			{
+				"name": "Storage & Organization",
+				"type": "String"
+			},
+			{
+				"name": "0.8",
+				"type": "String"
+			}
+		]
+	}
+}
