@@ -9,7 +9,8 @@
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureFileStorageLocation"
+				"type": "AzureFileStorageLocation",
+				"fileName": "new_user_credentials.csv"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
