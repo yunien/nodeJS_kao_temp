@@ -18,7 +18,7 @@
 					"name": "Select1"
 				}
 			],
-			"script": "source(output(\n\t\tColumn_1 as string,\n\t\tColumn_2 as string,\n\t\tColumn_3 as string,\n\t\tColumn_4 as string,\n\t\tColumn_5 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> MoviesADLS\nMoviesADLS select(mapColumn(\n\t\tColumn_1,\n\t\tColumn_2,\n\t\tColumn_3,\n\t\tColumn_4,\n\t\tColumn_5\n\t),\n\tpartitionBy('roundRobin', 2),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1"
+			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> MoviesADLS\nMoviesADLS select(mapColumn(\n\t\tColumn_1,\n\t\tColumn_3,\n\t\tColumn_4,\n\t\tColumn_5\n\t),\n\tpartitionBy('roundRobin', 2),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1"
 		}
 	}
 }

@@ -2,15 +2,17 @@
 	"name": "DelimitedText1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureFileStorage1",
+			"referenceName": "AzureBlobStorage1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureFileStorageLocation",
-				"fileName": "new_user_credentials.csv"
+				"type": "AzureBlobStorageLocation",
+				"fileName": "new_user_credentials.csv",
+				"folderPath": "output",
+				"container": "sample"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
