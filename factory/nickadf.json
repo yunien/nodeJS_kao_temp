@@ -1,0 +1,9 @@
+{
+	"name": "nickadf",
+	"location": "southcentralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "3aa80318-dfa0-4feb-854c-dcdf588ffcb8",
+		"tenantId": "f606447c-11d7-4153-87cd-8f82a9558611"
+	}
+}
