@@ -5,13 +5,22 @@
 		"factoryName": {
 			"value": "nickadf"
 		},
-		"AzureDataLakeStorage1_accountKey": {
-			"value": ""
-		},
 		"AzureFileStorage1_connectionString": {
 			"value": ""
 		},
-		"AzureDataLakeStorage1_properties_typeProperties_url": {
+		"AzureSynapseAnalytics2_connectionString": {
+			"value": ""
+		},
+		"LakeLinkedService_accountKey": {
+			"value": ""
+		},
+		"linkedServiceForCSV_connectionString": {
+			"value": ""
+		},
+		"OriiginCSVLinked_connectionString": {
+			"value": ""
+		},
+		"LakeLinkedService_properties_typeProperties_url": {
 			"value": "https://firstsan.dfs.core.windows.net"
 		},
 		"containerUri": {
