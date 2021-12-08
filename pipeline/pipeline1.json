@@ -74,6 +74,13 @@
 						"referenceName": "dataflow1",
 						"type": "DataFlowReference"
 					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "linkedServiceForCSV",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "nickcontainer"
+					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
