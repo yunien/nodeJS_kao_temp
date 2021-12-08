@@ -9,7 +9,12 @@
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation"
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "output",
+					"type": "Expression"
+				},
+				"fileSystem": "nickcontainer"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
