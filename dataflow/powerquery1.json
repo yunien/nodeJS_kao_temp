@@ -1,0 +1,18 @@
+{
+	"name": "powerquery1",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "DelimitedForCSV",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~>  DelimitedForCSV",
+					"dataset": {
+						"referenceName": "DelimitedForCSV",
+						"type": "DatasetReference"
+					}
+				}
+			]
+		}
+	}
+}
