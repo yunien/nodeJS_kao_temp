@@ -9,8 +9,8 @@
 		"type": "AzureSqlDWTable",
 		"schema": [],
 		"typeProperties": {
-			"schema": "dao",
-			"table": "datatranst"
+			"schema": "dbo",
+			"table": "Products"
 		}
 	}
 }
