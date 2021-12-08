@@ -79,7 +79,7 @@
 							"referenceName": "linkedServiceForCSV",
 							"type": "LinkedServiceReference"
 						},
-						"folderPath": "nickcontainer"
+						"folderPath": "nickcontainer/dw-test"
 					},
 					"compute": {
 						"coreCount": 8,
