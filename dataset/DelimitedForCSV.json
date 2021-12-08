@@ -11,6 +11,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "Sample-Spreadsheet-50000-rows.csv",
+				"folderPath": "output",
 				"container": "nickcontainer"
 			},
 			"columnDelimiter": ",",
