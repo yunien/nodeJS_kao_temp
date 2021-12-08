@@ -67,12 +67,16 @@
 					"sink": {
 						"type": "DelimitedTextSink",
 						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							}
 						},
 						"formatSettings": {
 							"type": "DelimitedTextWriteSettings",
 							"quoteAllText": true,
-							"fileExtension": ".txt"
+							"fileExtension": ""
 						}
 					},
 					"enableStaging": false,
@@ -87,7 +91,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DelimitedForCSV",
+						"referenceName": "originCSV",
 						"type": "DatasetReference"
 					}
 				],
