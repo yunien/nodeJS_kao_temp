@@ -12,13 +12,21 @@
 					"name": "dataFlowCSV"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSynapseAnalyticsTable1",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "Select1"
 				}
 			],
-			"script": "source(output(\n\t\t{Eldon Base for stackable storage shelf, platinum} as string,\n\t\t{Muhammed MacIntyre} as string,\n\t\t{3} as string,\n\t\t{-213.25} as string,\n\t\t{38.94} as string,\n\t\t{35} as string,\n\t\tNunavut as string,\n\t\t{Storage & Organization} as string,\n\t\t{0.8} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> dataFlowCSV\ndataFlowCSV select(mapColumn(\n\t\t{Eldon Base for stackable storage shelf, platinum},\n\t\t{Muhammed MacIntyre},\n\t\t{3},\n\t\t{-213.25},\n\t\t{38.94},\n\t\t{35},\n\t\tNunavut,\n\t\t{Storage & Organization},\n\t\t{0.8}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1"
+			"script": "source(output(\n\t\t{Eldon Base for stackable storage shelf, platinum} as string,\n\t\t{Muhammed MacIntyre} as string,\n\t\t{3} as string,\n\t\t{-213.25} as string,\n\t\t{38.94} as string,\n\t\t{35} as string,\n\t\tNunavut as string,\n\t\t{Storage & Organization} as string,\n\t\t{0.8} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> dataFlowCSV\ndataFlowCSV select(mapColumn(\n\t\t{Eldon Base for stackable storage shelf, platinum},\n\t\t{Muhammed MacIntyre},\n\t\t{3},\n\t\t{-213.25},\n\t\t{38.94},\n\t\t{35},\n\t\tNunavut,\n\t\t{Storage & Organization},\n\t\t{0.8}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tstaged: true,\n\tallowCopyCommand: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
 		}
 	}
 }
