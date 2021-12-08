@@ -11,6 +11,14 @@
 						"referenceName": "DelimitedForCSV",
 						"type": "DatasetReference"
 					}
+				},
+				{
+					"name": "lakeTransted",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~>  lakeTransted",
+					"dataset": {
+						"referenceName": "lakeTransted",
+						"type": "DatasetReference"
+					}
 				}
 			]
 		}
